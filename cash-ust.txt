@@ -1,0 +1,375 @@
+# 01 — Cash Treasury Bond Pricing
+
+A cash Treasury bond is just a stream of promised cash flows.
+
+The price is the present value of:
+1. coupon payments
+2. principal repayment at maturity
+
+---
+
+## 1. Basic Present Value
+
+For any cash flow:
+
+\[
+PV = \frac{CF}{(1+r)^t}
+\]
+
+Where:
+
+- \(PV\) = present value
+- \(CF\) = future cash flow
+- \(r\) = discount rate
+- \(t\) = time in years
+
+---
+
+## 2. Price of a Coupon Bond
+
+\[
+P = \sum_{i=1}^{N} \frac{C_i}{(1+y)^{t_i}} + \frac{F}{(1+y)^T}
+\]
+
+Where:
+
+- \(P\) = bond price
+- \(C_i\) = coupon cash flow at time \(t_i\)
+- \(F\) = face value / par value
+- \(y\) = yield to maturity
+- \(t_i\) = time to coupon payment
+- \(T\) = time to maturity
+- \(N\) = number of remaining coupon payments
+
+---
+
+## 3. Treasury Coupon Amount
+
+Treasury notes and bonds usually pay coupons semiannually.
+
+\[
+C = \frac{c \times F}{2}
+\]
+
+Where:
+
+- \(C\) = semiannual coupon payment
+- \(c\) = annual coupon rate
+- \(F\) = face value
+
+Example:
+
+\[
+c = 4.00\%, \quad F = 100
+\]
+
+\[
+C = \frac{0.04 \times 100}{2} = 2
+\]
+
+So the bond pays \(2\) every six months.
+
+---
+
+## 4. Semiannual Bond Pricing
+
+Because Treasury coupons are semiannual:
+
+\[
+P = \sum_{i=1}^{N} \frac{C}{(1+\frac{y}{2})^i} + \frac{F}{(1+\frac{y}{2})^N}
+\]
+
+Where:
+
+- \(y\) = annual yield
+- \(y/2\) = semiannual yield
+- \(N\) = number of semiannual periods
+
+---
+
+## 5. Expanded Coupon Bond Formula
+
+\[
+P =
+\frac{C}{(1+\frac{y}{2})^1}
++
+\frac{C}{(1+\frac{y}{2})^2}
++
+...
++
+\frac{C + F}{(1+\frac{y}{2})^N}
+\]
+
+Final payment includes both coupon and principal:
+
+\[
+C + F
+\]
+
+---
+
+## 6. Closed-Form Bond Price
+
+If every coupon is equal:
+
+\[
+P = C \left( \frac{1 - (1+\frac{y}{2})^{-N}}{\frac{y}{2}} \right)
++ F(1+\frac{y}{2})^{-N}
+\]
+
+This is just:
+
+\[
+P = PV(\text{coupon annuity}) + PV(\text{principal})
+\]
+
+---
+
+## 7. Discount Bond
+
+A bond trades below par when:
+
+\[
+P < F
+\]
+
+This usually means:
+
+\[
+y > c
+\]
+
+The market yield is higher than the coupon rate.
+
+---
+
+## 8. Premium Bond
+
+A bond trades above par when:
+
+\[
+P > F
+\]
+
+This usually means:
+
+\[
+y < c
+\]
+
+The market yield is lower than the coupon rate.
+
+---
+
+## 9. Par Bond
+
+A bond trades near par when:
+
+\[
+P \approx F
+\]
+
+This usually means:
+
+\[
+y \approx c
+\]
+
+The market yield is close to the coupon rate.
+
+---
+
+## 10. Zero-Coupon Bond
+
+For a zero-coupon bond:
+
+\[
+C = 0
+\]
+
+So the price is only:
+
+\[
+P = \frac{F}{(1+y)^T}
+\]
+
+For semiannual compounding:
+
+\[
+P = \frac{F}{(1+\frac{y}{2})^N}
+\]
+
+---
+
+## 11. Yield From Price
+
+There is usually no clean algebraic solution for yield on a coupon bond.
+
+Instead, yield is the value of \(y\) that solves:
+
+\[
+P = \sum_{i=1}^{N} \frac{C}{(1+\frac{y}{2})^i} + \frac{F}{(1+\frac{y}{2})^N}
+\]
+
+In practice, this is solved numerically.
+
+---
+
+## 12. Price-Yield Relationship
+
+Bond prices and yields move inversely:
+
+\[
+\frac{\partial P}{\partial y} < 0
+\]
+
+Meaning:
+
+\[
+y \uparrow \Rightarrow P \downarrow
+\]
+
+\[
+y \downarrow \Rightarrow P \uparrow
+\]
+
+---
+
+## 13. Duration Intuition
+
+The price sensitivity to yield is approximately:
+
+\[
+\Delta P \approx -D_{mod} \times P \times \Delta y
+\]
+
+Where:
+
+- \(D_{mod}\) = modified duration
+- \(P\) = bond price
+- \(\Delta y\) = change in yield
+
+---
+
+## 14. DV01
+
+DV01 is the dollar value of a 1 basis point move in yield.
+
+\[
+DV01 = -\frac{\Delta P}{\Delta y_{bp}}
+\]
+
+For a 1 bp move:
+
+\[
+\Delta y = 0.0001
+\]
+
+Approximation:
+
+\[
+DV01 \approx D_{mod} \times P \times 0.0001
+\]
+
+---
+
+## 15. Macaulay Duration
+
+\[
+D_{Mac} =
+\frac{
+\sum_{i=1}^{N} t_i \times \frac{CF_i}{(1+y)^t_i}
+}{
+P
+}
+\]
+
+Where:
+
+- \(D_{Mac}\) = weighted average time to receive cash flows
+- \(CF_i\) = cash flow at time \(t_i\)
+- \(P\) = bond price
+
+---
+
+## 16. Modified Duration
+
+\[
+D_{mod} = \frac{D_{Mac}}{1+\frac{y}{m}}
+\]
+
+Where:
+
+- \(m\) = compounding frequency
+- for Treasuries, usually \(m = 2\)
+
+So:
+
+\[
+D_{mod} = \frac{D_{Mac}}{1+\frac{y}{2}}
+\]
+
+---
+
+## 17. Convexity
+
+Duration is a linear approximation.
+
+Convexity adjusts for curvature:
+
+\[
+\Delta P \approx
+-D_{mod} P \Delta y
++
+\frac{1}{2} Cvx \times P \times (\Delta y)^2
+\]
+
+Where:
+
+- \(Cvx\) = convexity
+- \(\Delta y\) = yield change
+
+---
+
+## 18. Full Price Approximation
+
+\[
+\frac{\Delta P}{P}
+\approx
+-D_{mod}\Delta y
++
+\frac{1}{2}Cvx(\Delta y)^2
+\]
+
+This is the basic duration-convexity approximation.
+
+---
+
+## 19. Cash Bond Pricing Summary
+
+The core cash bond price is:
+
+\[
+P = \sum_{i=1}^{N} \frac{CF_i}{(1+y_i)^{t_i}}
+\]
+
+For a plain Treasury bond with one yield:
+
+\[
+P = \sum_{i=1}^{N} \frac{C}{(1+\frac{y}{2})^i}
++
+\frac{F}{(1+\frac{y}{2})^N}
+\]
+
+Or closed form:
+
+\[
+P = C \left( \frac{1 - (1+\frac{y}{2})^{-N}}{\frac{y}{2}} \right)
++ F(1+\frac{y}{2})^{-N}
+\]
+
+That is the whole game:
+
+\[
+\text{Bond Price} = PV(\text{Coupons}) + PV(\text{Principal})
+\]
