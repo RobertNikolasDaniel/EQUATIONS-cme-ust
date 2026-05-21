@@ -1,168 +1,91 @@
-# 01 — Cash UST Pricing Equations
-
-## Cash Flow
-
-\[
-C=\frac{c \times F}{2}
-\]
-
-\[
-CF_i=C
-\]
-
-\[
-CF_N=C+F
-\]
+# CASH UST PRICING
 
 ---
 
-## Discount Factor
+# Present Value
 
-\[
-DF_i=\frac{1}{(1+\frac{y}{2})^i}
-\]
+:contentReference[oaicite:0]{index=0}
 
 ---
 
-## Dirty Price
+# Semiannual Treasury Coupon
 
-\[
-P_{dirty}=\sum_{i=1}^{N} CF_i \times DF_i
-\]
-
-\[
-P_{dirty}
-=
-\sum_{i=1}^{N}
-\frac{C}{(1+\frac{y}{2})^i}
-+
-\frac{F}{(1+\frac{y}{2})^N}
-\]
+:contentReference[oaicite:1]{index=1}
 
 ---
 
-## Closed Form
+# Discount Factor
 
-\[
-P_{dirty}
-=
-C
-\left(
-\frac{1-(1+\frac{y}{2})^{-N}}
-{\frac{y}{2}}
-\right)
-+
-F(1+\frac{y}{2})^{-N}
-\]
+:contentReference[oaicite:2]{index=2}
 
 ---
 
-## Accrued Interest
+# Dirty Price
 
-\[
-AI=C \times \frac{d}{D}
-\]
+:contentReference[oaicite:3]{index=3}
 
 ---
 
-## Clean Price
+# Closed Form Treasury Price
 
-\[
-P_{clean}=P_{dirty}-AI
-\]
+:contentReference[oaicite:4]{index=4}
 
 ---
 
-## Dirty Price From Clean Price
+# Accrued Interest
 
-\[
-P_{dirty}=P_{clean}+AI
-\]
+:contentReference[oaicite:5]{index=5}
 
 ---
 
-## Yield Equation
+# Clean Price
 
-\[
-P_{dirty}
-=
-\sum_{i=1}^{N}
-\frac{CF_i}{(1+\frac{y}{2})^i}
-\]
-
-Solve for:
-
-\[
-y
-\]
+:contentReference[oaicite:6]{index=6}
 
 ---
 
-## Price Change
+# Dirty Price From Clean
 
-\[
-\Delta P \approx -D_{mod}P\Delta y
-\]
+:contentReference[oaicite:7]{index=7}
 
 ---
 
-## DV01
+# Yield Equation
 
-\[
-DV01 \approx D_{mod} \times P \times 0.0001
-\]
+:contentReference[oaicite:8]{index=8}
 
 ---
 
-## Modified Duration
+# Macaulay Duration
 
-\[
-D_{mod}
-=
-\frac{D_{Mac}}
-{1+\frac{y}{2}}
-\]
+:contentReference[oaicite:9]{index=9}
 
 ---
 
-## Macaulay Duration
+# Modified Duration
 
-\[
-D_{Mac}
-=
-\frac{
-\sum_{i=1}^{N}
-t_i
-\left(
-\frac{CF_i}{(1+\frac{y}{2})^i}
-\right)
-}
-{P_{dirty}}
-\]
+:contentReference[oaicite:10]{index=10}
 
 ---
 
-## Convexity Approximation
+# DV01
 
-\[
-\frac{\Delta P}{P}
-\approx
--D_{mod}\Delta y
-+
-\frac{1}{2}Convexity(\Delta y)^2
-\]
+:contentReference[oaicite:11]{index=11}
 
 ---
 
-## One-Line Summary
+# Price Change Approximation
 
-\[
-P_{clean}
-=
-\left[
-\sum_{i=1}^{N}
-\frac{CF_i}{(1+\frac{y}{2})^i}
-\right]
--
-AI
-\]
+:contentReference[oaicite:12]{index=12}
+
+---
+
+# Convexity Approximation
+
+:contentReference[oaicite:13]{index=13}
+
+---
+
+# Treasury Bond Core Identity
+
+:contentReference[oaicite:14]{index=14}
