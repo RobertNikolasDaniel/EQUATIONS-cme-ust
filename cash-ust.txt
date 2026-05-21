@@ -1,102 +1,260 @@
 # cash ust equations
 
-present value
+simple treasury caveman math
+
+---
+
+# present value
 
 PV = CF / (1+r)^t
 
-future cash flow discounted back to today
+what this means:
+
+future money worth less today
+
+variables:
+
+PV = present value
+
+CF = future cash flow
+
+r = discount rate / yield
+
+t = time
 
 ---
 
-coupon payment
+# treasury coupon payment
 
 C = (c * F) / 2
 
-semiannual treasury coupon
+what this means:
+
+treasuries pay coupons 2 times per year
+
+variables:
+
+C = coupon payment
+
+c = annual coupon rate
+
+F = face value
+
+example:
+
+4% treasury
+
+C = (0.04 * 100) / 2
+
+C = 2
+
+bond pays:
+
+2 dollars every 6 months
 
 ---
 
-dirty price
+# dirty price
 
 P =
-Σ [ C / (1 + y/2)^i ]
+Σ [ C / (1+y/2)^i ]
 +
-F / (1 + y/2)^N
+F / (1+y/2)^N
+
+what this means:
 
 full treasury value
 
+all coupons discounted back to today
+
+plus principal discounted back to today
+
+variables:
+
+P = dirty price
+
+Σ = sum all coupon payments
+
+C = coupon payment
+
+y = yield
+
+i = coupon payment number
+
+F = face value
+
+N = final payment period
+
 ---
 
-clean price
+# clean price
 
 Pclean = Pdirty - AI
 
-quoted treasury price
+what this means:
+
+market quoted treasury price
+
+does NOT include accrued interest
+
+variables:
+
+Pclean = clean price
+
+Pdirty = full bond value
+
+AI = accrued interest
 
 ---
 
-accrued interest
+# accrued interest
 
 AI = C * (d / D)
 
+what this means:
+
 interest earned since last coupon
+
+variables:
+
+AI = accrued interest
+
+C = coupon payment
+
+d = days since last coupon
+
+D = total days in coupon period
 
 ---
 
-yield relationship
+# yield relationship
 
 yield up -> price down
 
 yield down -> price up
 
-inverse relationship
+what this means:
+
+higher yields discount cash flows harder
+
+therefore bond prices fall
 
 ---
 
-yield to maturity
+# yield to maturity
 
 P =
-Σ [ CFi / (1 + y/2)^i ]
+Σ [ CFi / (1+y/2)^i ]
 
 solve for y
 
+what this means:
+
+yield is the discount rate that makes all future cash flows equal current price
+
+variables:
+
+P = bond price
+
+CFi = future cash flow
+
+y = yield
+
+i = payment period
+
 ---
 
-macaulay duration
+# macaulay duration
 
 DMac =
 Σ [ ti * PVCFi ] / P
 
-weighted timing of cash flows
+what this means:
+
+weighted average timing of cash flows
+
+roughly:
+
+how long money trapped in bond
+
+variables:
+
+DMac = macaulay duration
+
+ti = time of cash flow
+
+PVCFi = present value of each cash flow
+
+P = bond price
 
 ---
 
-modified duration
+# modified duration
 
 DMod =
-DMac / (1 + y/2)
+DMac / (1+y/2)
 
-rate sensitivity
+what this means:
+
+how sensitive bond price is to yield changes
+
+this is trader duration
+
+variables:
+
+DMod = modified duration
+
+DMac = macaulay duration
+
+y = yield
 
 ---
 
-price change approximation
+# price change approximation
 
 ΔP ≈ -DMod * P * Δy
 
-duration approximation
+what this means:
+
+estimate price move from yield move
+
+variables:
+
+ΔP = change in price
+
+DMod = modified duration
+
+P = bond price
+
+Δy = yield change
+
+negative sign means:
+
+yields up -> prices down
 
 ---
 
-dv01
+# dv01
 
 DV01 ≈ DMod * P * 0.0001
 
-1bp dollar sensitivity
+what this means:
+
+dollar value of 1bp yield move
+
+variables:
+
+DV01 = dollar value of 1bp
+
+DMod = modified duration
+
+P = bond price
+
+0.0001 = 1 basis point
 
 ---
 
-convexity
+# convexity
 
 ΔP/P
 ≈
@@ -104,36 +262,93 @@ convexity
 +
 0.5 * Convexity * (Δy)^2
 
-curvature adjustment
+what this means:
+
+duration alone not enough
+
+bond price curve bends
+
+convexity adjusts for curve shape
+
+variables:
+
+ΔP/P = percent price change
+
+DMod = modified duration
+
+Δy = yield move
+
+Convexity = curvature adjustment
 
 ---
 
-zero coupon treasury
+# zero coupon treasury
 
 P = F / (1+y)^T
 
+what this means:
+
 no coupon payments
+
+only final payment discounted back
+
+variables:
+
+P = price
+
+F = face value
+
+y = yield
+
+T = time to maturity
 
 ---
 
-premium bond
+# premium bond
 
 P > F
+
+what this means:
+
+bond trades above par
+
+usually because:
 
 coupon > yield
 
 ---
 
-discount bond
+# discount bond
 
 P < F
+
+what this means:
+
+bond trades below par
+
+usually because:
 
 yield > coupon
 
 ---
 
-par bond
+# par bond
 
 P ≈ F
 
+what this means:
+
+bond trades near face value
+
+usually because:
+
 yield ≈ coupon
+
+---
+
+# treasury caveman truth
+
+bond price =
+discounted coupons
++
+discounted principal
