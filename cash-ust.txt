@@ -1,308 +1,139 @@
-# CASH UST EQUATIONS
+# cash ust equations
 
-Simple visual reference sheet for core U.S. Treasury cash bond math.
+present value
 
----
+PV = CF / (1+r)^t
 
-# 1. PRESENT VALUE
-
-Future cash flows discounted back to today.
-
-\[
-PV = \frac{CF}{(1+r)^t}
-\]
-
-Where:
-
-- \(CF\) = future cash flow
-- \(r\) = discount rate
-- \(t\) = time
+future cash flow discounted back to today
 
 ---
 
-# 2. TREASURY COUPON PAYMENT
+coupon payment
 
-Treasuries pay semiannual coupons.
+C = (c * F) / 2
 
-\[
-C = \frac{c \times F}{2}
-\]
-
-Where:
-
-- \(C\) = coupon payment
-- \(c\) = annual coupon rate
-- \(F\) = face value
-
-Example:
-
-4% coupon Treasury:
-
-\[
-C = \frac{0.04 \times 100}{2} = 2
-\]
-
-Pays:
-
-- \$2 every 6 months
-- \$100 principal at maturity
+semiannual treasury coupon
 
 ---
 
-# 3. TREASURY DIRTY PRICE
+dirty price
 
-Full bond value including accrued interest.
-
-\[
-P_{dirty}
-=
-\sum_{i=1}^{N}
-\frac{C}{\left(1+\frac{y}{2}\right)^i}
+P =
+Σ [ C / (1 + y/2)^i ]
 +
-\frac{F}{\left(1+\frac{y}{2}\right)^N}
-\]
+F / (1 + y/2)^N
 
-Interpretation:
-
-Bond price is:
-
-- present value of coupons
-- plus present value of principal
-
-discounted using market yield.
+full treasury value
 
 ---
 
-# 4. TREASURY CLEAN PRICE
+clean price
 
-Quoted market price excluding accrued interest.
+Pclean = Pdirty - AI
 
-\[
-P_{clean}=P_{dirty}-AI
-\]
-
-Where:
-
-- \(AI\) = accrued interest
-
-Most Treasury screens quote clean price.
+quoted treasury price
 
 ---
 
-# 5. ACCRUED INTEREST
+accrued interest
 
-Interest earned since last coupon payment.
+AI = C * (d / D)
 
-\[
-AI=C\times\frac{d}{D}
-\]
-
-Where:
-
-- \(d\) = days since last coupon
-- \(D\) = days in coupon period
+interest earned since last coupon
 
 ---
 
-# 6. PRICE ↔ YIELD RELATIONSHIP
+yield relationship
 
-Bond prices and yields move inversely.
+yield up -> price down
 
-\[
-y\uparrow \Rightarrow P\downarrow
-\]
+yield down -> price up
 
-\[
-y\downarrow \Rightarrow P\uparrow
-\]
-
-Higher yields mean heavier discounting.
+inverse relationship
 
 ---
 
-# 7. YIELD TO MATURITY
+yield to maturity
 
-The yield that solves:
+P =
+Σ [ CFi / (1 + y/2)^i ]
 
-\[
-P_{dirty}
-=
-\sum_{i=1}^{N}
-\frac{CF_i}
-{\left(1+\frac{y}{2}\right)^i}
-\]
-
-Yield is usually solved numerically.
-
-There is normally no closed-form solution.
+solve for y
 
 ---
 
-# 8. MACAULAY DURATION
+macaulay duration
 
-Weighted average time of bond cash flows.
+DMac =
+Σ [ ti * PVCFi ] / P
 
-\[
-D_{Mac}
-=
-\frac{
-\sum_{i=1}^{N}
-t_i
-\left(
-\frac{CF_i}
-{\left(1+\frac{y}{2}\right)^i}
-\right)
-}
-{P}
-\]
-
-Interpretation:
-
-Longer duration = more rate sensitivity.
+weighted timing of cash flows
 
 ---
 
-# 9. MODIFIED DURATION
+modified duration
 
-Approximate price sensitivity to yield changes.
+DMod =
+DMac / (1 + y/2)
 
-\[
-D_{mod}
-=
-\frac{D_{Mac}}
-{1+\frac{y}{2}}
-\]
-
-This is the important trading duration.
+rate sensitivity
 
 ---
 
-# 10. PRICE CHANGE APPROXIMATION
+price change approximation
 
-First-order duration approximation.
+ΔP ≈ -DMod * P * Δy
 
-\[
-\Delta P
-\approx
--D_{mod}P\Delta y
-\]
-
-Interpretation:
-
-- yields up → price down
-- yields down → price up
+duration approximation
 
 ---
 
-# 11. DV01
+dv01
 
-Dollar value of a 1bp move in yield.
+DV01 ≈ DMod * P * 0.0001
 
-\[
-DV01
-\approx
-D_{mod}\times P\times0.0001
-\]
-
-Interpretation:
-
-Approximate dollar PnL for a 1bp rate move.
+1bp dollar sensitivity
 
 ---
 
-# 12. CONVEXITY
+convexity
 
-Second-order curvature adjustment.
-
-\[
-\frac{\Delta P}{P}
-\approx
--D_{mod}\Delta y
+ΔP/P
+≈
+-DMod * Δy
 +
-\frac{1}{2}Convexity(\Delta y)^2
-\]
+0.5 * Convexity * (Δy)^2
 
-Duration alone becomes inaccurate on large moves.
-
-Convexity corrects the curve.
+curvature adjustment
 
 ---
 
-# 13. ZERO COUPON TREASURY
+zero coupon treasury
 
-No coupon payments.
+P = F / (1+y)^T
 
-Only discounted principal.
-
-\[
-P
-=
-\frac{F}
-{(1+y)^T}
-\]
+no coupon payments
 
 ---
 
-# 14. PREMIUM BOND
+premium bond
 
-Bond trades above par.
-
-\[
 P > F
-\]
 
-Usually:
-
-\[
-c > y
-\]
-
-Coupon exceeds market yield.
+coupon > yield
 
 ---
 
-# 15. DISCOUNT BOND
+discount bond
 
-Bond trades below par.
-
-\[
 P < F
-\]
 
-Usually:
-
-\[
-y > c
-\]
-
-Market yield exceeds coupon.
+yield > coupon
 
 ---
 
-# 16. PAR BOND
+par bond
 
-Bond trades near face value.
+P ≈ F
 
-\[
-P \approx F
-\]
-
-Usually:
-
-\[
-y \approx c
-\]
-
----
-
-# 17. CORE TREASURY IDENTITY
-
-\[
-Bond\ Price
-=
-PV(Coupons)
-+
-PV(Principal)
-\]
-
-That is the entire foundation of cash UST pricing.
+yield ≈ coupon
